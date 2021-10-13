@@ -1,0 +1,22 @@
+http:
+  routers:
+    plexstream1:
+      entrypoints:
+        - websecure
+      service: plexstream1
+      rule: Host(`ns1.uniplx.com`,`de-central-1.uniplx.com`,`sgp-central-1.uniplx.com`,`au-central-1.uniplx.com`)
+    speedtest:
+      entrypoints:
+        - websecure
+      service: speedtest
+      rule: Host(`st.uniplx.com`,`st-de.uniplx.com`,`st-sgp.uniplx.com`,`st-au.uniplx.com`)
+
+  services:
+    plexstream1:
+      loadBalancer:
+        servers:
+        - url: "https://rs4.uniplx.com"
+    speedtest:
+      loadBalancer:
+        servers:
+        - url: "https://st-us.uniplx.com"
